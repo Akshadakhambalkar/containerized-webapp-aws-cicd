@@ -1,4 +1,4 @@
-name: Deploy to ECR
+name: Deploy to ECS
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +31,14 @@ jobs:
         run: |
           docker tag my-app:latest ${{ steps.login-ecr.outputs.registry }}/my-app:latest
 
-      - name: Push Docker Image to ECR
+      - name: Push Docker Image
         run: |
           docker push ${{ steps.login-ecr.outputs.registry }}/my-app:latest
+
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: task-definition.json
+          service: my-service
+          cluster: my-cluster
+          wait-for-service-stability: true
