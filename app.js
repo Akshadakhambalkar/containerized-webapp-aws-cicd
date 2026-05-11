@@ -1,7 +1,7 @@
 const http = require("http");
 
 const server = http.createServer((req, res) => {
-  res.write("Hello World from Docker 🚀");
+  res.write("CI/CD Pipeline Working Successfully 🚀");
   res.end();
 });
 
