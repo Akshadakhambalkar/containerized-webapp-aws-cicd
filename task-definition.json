@@ -1,0 +1,29 @@
+{
+  "family": "my-task",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "my-container",
+      "image": "REPLACE_IMAGE",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/my-task",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::247332612521:role/ecsTaskExecutionRole"
+}
