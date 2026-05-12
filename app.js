@@ -1,12 +1,21 @@
 const express = require("express");
-
 const app = express();
 
 app.get("/", (req, res) => {
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.send("CI/CD Deployment Successful 🚀");
+  res.send(`
+    <html>
+      <head>
+        <title>AK DevOps</title>
+      </head>
+      <body style="text-align:center; font-family:Arial;">
+        <h1>🚀 AK DevOps</h1>
+        <h2>CI/CD Pipeline Working Successfully</h2>
+        <p>Deployed on AWS ECS + ALB + Route 53 + SSL 🔐</p>
+      </body>
+    </html>
+  `);
 });
 
-app.listen(3000, "0.0.0.0", () => {
+app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
